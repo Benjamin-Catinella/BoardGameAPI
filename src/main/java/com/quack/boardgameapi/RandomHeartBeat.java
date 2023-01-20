@@ -9,7 +9,7 @@ public class RandomHeartBeat implements HeartBeatSensor{
     Random random = new Random();
     @Override
     public int get() {
-        return random.nextInt();
+        return random.nextInt(40,230);
     }
 
 }
