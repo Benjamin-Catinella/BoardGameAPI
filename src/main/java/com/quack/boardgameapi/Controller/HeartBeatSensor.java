@@ -1,4 +1,4 @@
-package com.quack.boardgameapi;
+package com.quack.boardgameapi.Controller;
 
 public interface HeartBeatSensor {
     int get();
