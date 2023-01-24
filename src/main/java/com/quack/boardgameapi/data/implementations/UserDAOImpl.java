@@ -1,8 +1,8 @@
-package com.quack.boardgameapi.Data.Implementations;
+package com.quack.boardgameapi.data.implementations;
 
-import com.quack.boardgameapi.Data.Database;
-import com.quack.boardgameapi.Data.Interfaces.UserDAO;
-import com.quack.boardgameapi.Data.DTO.UserDTO;
+import com.quack.boardgameapi.data.Database;
+import com.quack.boardgameapi.data.interfaces.UserDAO;
+import com.quack.boardgameapi.data.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;

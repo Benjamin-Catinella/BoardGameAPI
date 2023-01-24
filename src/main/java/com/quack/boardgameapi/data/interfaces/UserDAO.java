@@ -1,7 +1,7 @@
-package com.quack.boardgameapi.Data.Interfaces;
+package com.quack.boardgameapi.data.interfaces;
 
 
-import com.quack.boardgameapi.Data.DTO.UserDTO;
+import com.quack.boardgameapi.data.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 

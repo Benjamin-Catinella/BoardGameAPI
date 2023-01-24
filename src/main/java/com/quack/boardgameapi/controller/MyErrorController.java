@@ -1,4 +1,4 @@
-package com.quack.boardgameapi.Controller;
+package com.quack.boardgameapi.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.quack.boardgameapi.Data;
+package com.quack.boardgameapi.data;
 
 
 import java.sql.Connection;

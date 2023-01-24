@@ -1,9 +1,8 @@
-package com.quack.boardgameapi.Data.Implementations;
+package com.quack.boardgameapi.data.implementations;
 
-import com.quack.boardgameapi.Data.Database;
-import com.quack.boardgameapi.Data.Interfaces.PlayedMatchDAO;
-import com.quack.boardgameapi.Data.DTO.PlayedMatchDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.quack.boardgameapi.data.Database;
+import com.quack.boardgameapi.data.interfaces.PlayedMatchDAO;
+import com.quack.boardgameapi.data.dto.PlayedMatchDTO;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;

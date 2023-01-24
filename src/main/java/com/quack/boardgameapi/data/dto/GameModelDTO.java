@@ -1,6 +1,6 @@
-package com.quack.boardgameapi.Data.DTO;
+package com.quack.boardgameapi.data.dto;
 
-import com.quack.boardgameapi.Data.Interfaces.DTO;
+import com.quack.boardgameapi.data.interfaces.DTO;
 
 public record GameModelDTO(
         int id,
