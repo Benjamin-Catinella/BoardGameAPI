@@ -19,6 +19,9 @@ public class GameCollection {
         this.collection.put(uuid,game);
         return uuid;
     }
+    public Game getGame(String uuid){
+        return this.collection.get(uuid);
+    }
     public Map<String, Game> getCollection() {
         return Collections.unmodifiableMap(this.collection);
     }

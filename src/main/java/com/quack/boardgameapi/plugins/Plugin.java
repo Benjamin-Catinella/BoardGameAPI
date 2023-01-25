@@ -6,6 +6,6 @@ import fr.le_campus_numerique.square_games.engine.GameFactory;
 public interface Plugin {
     CreationParams getDefaultParams();
 
-    GameFactory getFactory();
+    GameFactory getFactoryInstance();
     String gameId();
 }

@@ -3,37 +3,37 @@ package com.quack.boardgameapi.plugins;
 import com.quack.boardgameapi.CreationParams;
 import com.quack.boardgameapi.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
-import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
+import fr.le_campus_numerique.square_games.engine.taquin.TaquinGameFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("application.properties")
-public class TicTacToePlugin implements Plugin{
-
-    @Value("${TicTacToe.defaultPlayerCount}")
+public class TaquinPlugin implements Plugin {
+    @Value("${Taquin.defaultPlayerCount}")
     int defaultPlayerCount;
-    @Value("${TicTacToe.defaultBoardSize}")
+    @Value("${Taquin.defaultBoardSize}")
     int defaultBoardSize;
-    @Value("${TicTacToe.gameId}")
+    @Value("${Taquin.gameId}")
     String gameId;
 
-    private TicTacToeGameFactory ticTacToeGameFactory;
-    public TicTacToePlugin(){
-        ticTacToeGameFactory = new TicTacToeGameFactory();
+    TaquinGameFactory taquinGameFactory;
+    public TaquinPlugin(){
+        taquinGameFactory = new TaquinGameFactory();
     }
     @Override
     public CreationParams getDefaultParams() {
-        return new GameCreationParams(gameId, defaultPlayerCount, defaultBoardSize);
+        return new GameCreationParams(gameId, 1, 4);
     }
 
     @Override
     public GameFactory getFactoryInstance() {
-        return this.ticTacToeGameFactory;
+        return taquinGameFactory;
     }
+
     @Override
     public String gameId() {
-        return this.gameId;
+        return gameId;
     }
 }
