@@ -1,7 +1,7 @@
 package com.quack.boardgameapi.plugins;
 
-import com.quack.boardgameapi.CreationParams;
-import com.quack.boardgameapi.GameCreationParams;
+import com.quack.boardgameapi.gamedata.CreationParams;
+import com.quack.boardgameapi.gamedata.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import fr.le_campus_numerique.square_games.engine.taquin.TaquinGameFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,26 +10,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("application.properties")
-public class TaquinPlugin implements Plugin {
+public class TaquinPlugin implements GamePlugin {
     @Value("${Taquin.defaultPlayerCount}")
-    int defaultPlayerCount;
+    private int defaultPlayerCount;
     @Value("${Taquin.defaultBoardSize}")
-    int defaultBoardSize;
+    private int defaultBoardSize;
     @Value("${Taquin.gameId}")
-    String gameId;
+    private String gameId;
 
-    TaquinGameFactory taquinGameFactory;
+    private TaquinGameFactory taquinGameFactory;
     public TaquinPlugin(){
         taquinGameFactory = new TaquinGameFactory();
     }
     @Override
     public CreationParams getDefaultParams() {
-        return new GameCreationParams(gameId, 1, 4);
+        return new GameCreationParams(gameId, defaultPlayerCount, defaultBoardSize);
     }
 
     @Override
     public GameFactory getFactoryInstance() {
-        return taquinGameFactory;
+        return this.taquinGameFactory;
     }
 
     @Override

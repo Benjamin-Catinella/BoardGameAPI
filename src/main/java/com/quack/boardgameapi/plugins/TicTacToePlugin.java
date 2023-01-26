@@ -1,7 +1,7 @@
 package com.quack.boardgameapi.plugins;
 
-import com.quack.boardgameapi.CreationParams;
-import com.quack.boardgameapi.GameCreationParams;
+import com.quack.boardgameapi.gamedata.CreationParams;
+import com.quack.boardgameapi.gamedata.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("application.properties")
-public class TicTacToePlugin implements Plugin{
+public class TicTacToePlugin implements GamePlugin {
 
     @Value("${TicTacToe.defaultPlayerCount}")
     int defaultPlayerCount;
