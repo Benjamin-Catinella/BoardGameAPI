@@ -1,13 +1,17 @@
 package com.quack.boardgameapi.service;
 
+import com.quack.boardgameapi.TranslationService;
 import com.quack.boardgameapi.controller.GamePluginsMap;
 import com.quack.boardgameapi.gamedata.GameCreationParams;
 
+import com.quack.boardgameapi.gamedata.GameLocalPersistenceEngine;
 import fr.le_campus_numerique.square_games.engine.CellPosition;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
 import fr.le_campus_numerique.square_games.engine.Token;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +23,13 @@ import java.util.stream.Stream;
 @Service
 public class GameServiceImpl implements GameService{
 
-    PersistenceEngine<Game> gamePersistenceEngine;
-    GamePluginsMap plugins;
-    public GameServiceImpl(PersistenceEngine<Game> persistenceEngine, GamePluginsMap plugins){
-        this.gamePersistenceEngine = gamePersistenceEngine;
+    @Autowired
+    private GameLocalPersistenceEngine gamePersistenceEngine;
+    private GamePluginsMap plugins;
+    private TranslationService translationService;
+    public GameServiceImpl(GamePluginsMap plugins, TranslationService translationService){
         this.plugins = plugins;
+        this.translationService = translationService;
     }
     @Override
     public Collection<Game> getGames() {
@@ -96,7 +102,7 @@ public class GameServiceImpl implements GameService{
      * @return The uuid of the created game
      */
     @Override
-    public String createGame(GameCreationParams gameCreationParams) {
+    public String createGame(GameCreationParams gameCreationParams, Locale locale) {
 
         String gameType = gameCreationParams.gameType();
 
@@ -106,7 +112,8 @@ public class GameServiceImpl implements GameService{
                         gameCreationParams.numberOfPlayers(),
                         gameCreationParams.boardSize()
                 );
-        String gameUUID = (String) gamePersistenceEngine.create(game);
-        return gameUUID;
+        String gameUUID = gamePersistenceEngine.create(game);
+        String gameKey = "Game."+ gameCreationParams.gameType() + ".name";
+        return gameUUID += translationService.translate(gameKey, locale);
     }
 }

@@ -7,11 +7,14 @@ import fr.le_campus_numerique.square_games.engine.CellPosition;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.Token;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 @RestController
 public class GameController {
+
     private GameService gameService;
     public GameController(GameService gameService){
         this.gameService = gameService;
@@ -35,13 +38,11 @@ public class GameController {
     public Collection<Token> moveToken(@PathVariable("gameUUID") String uuid, @RequestBody CellPosition[] cellPositions) {
         return gameService.moveToken(uuid,cellPositions);
     }
-//    @GetMapping("/test/language")
-//    public Locale testLanguage(@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language) {
-//        return Locale.forLanguageTag(language);
-//    }
+
+
     @PostMapping("/games")
-    public String createGame(@RequestBody GameCreationParams gameCreationParams) {
-        return gameService.createGame(gameCreationParams);
+    public String createGame(@RequestBody GameCreationParams gameCreationParams, Locale locale) {
+        return gameService.createGame(gameCreationParams, locale);
     }
 
 }
