@@ -1,4 +1,4 @@
-package com.quack.boardgameapi.service;
+package com.quack.boardgameapi.service.interfaces;
 
 import com.quack.boardgameapi.gamedata.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.CellPosition;

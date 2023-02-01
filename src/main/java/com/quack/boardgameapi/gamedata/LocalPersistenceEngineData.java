@@ -1,5 +1,11 @@
 package com.quack.boardgameapi.gamedata;
 
 public abstract class LocalPersistenceEngineData {
-    String id = "local";
+
+    @Deprecated
+    /**
+     * @serialField
+     * Use @Profile
+     */
+    protected String id = "local";
 }

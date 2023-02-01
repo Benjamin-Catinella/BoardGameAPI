@@ -1,18 +1,20 @@
-package com.quack.boardgameapi.gamedata;
+package com.quack.boardgameapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 
 @Service
-public class Database {
+@Profile("mysql")
+public class MysqlDatabaseService {
 
     private DataSource dataSource;
 
     @Autowired
-    public Database(){
+    public MysqlDatabaseService(){
         createDataSource();
     }
 

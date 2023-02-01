@@ -1,17 +1,16 @@
 package com.quack.boardgameapi.service;
 
-import com.quack.boardgameapi.TranslationService;
 import com.quack.boardgameapi.controller.GamePluginsMap;
 import com.quack.boardgameapi.gamedata.GameCreationParams;
 
-import com.quack.boardgameapi.gamedata.GameLocalPersistenceEngine;
+import com.quack.boardgameapi.service.interfaces.GameService;
+import com.quack.boardgameapi.service.interfaces.GamePersistenceEngine;
 import fr.le_campus_numerique.square_games.engine.CellPosition;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
 import fr.le_campus_numerique.square_games.engine.Token;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +20,10 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @Service
-public class GameServiceImpl implements GameService{
+public class GameServiceImpl implements GameService {
 
     @Autowired
-    private GameLocalPersistenceEngine gamePersistenceEngine;
+    private GamePersistenceEngine gamePersistenceEngine;
     private GamePluginsMap plugins;
     private TranslationService translationService;
     public GameServiceImpl(GamePluginsMap plugins, TranslationService translationService){
@@ -48,7 +47,7 @@ public class GameServiceImpl implements GameService{
      */
     @Override
     public Collection<Token> getAvailableTokens(@PathVariable("uuid") String uuid) {
-        Game game = gamePersistenceEngine.read(uuid);
+        Game game = (Game) gamePersistenceEngine.read(uuid);
         Map<CellPosition,Token> board = game.getBoard();
         Collection<Token> tokens = board.keySet().stream()
                 .map(key -> board.get(key))
@@ -65,7 +64,7 @@ public class GameServiceImpl implements GameService{
     public Collection<Token> moveToken(String uuid, CellPosition[] cellPositions) {
         CellPosition oldPosition = cellPositions[0];
         CellPosition newPosition = cellPositions[1];
-        Game game = gamePersistenceEngine.read(uuid);
+        Game game = (Game)gamePersistenceEngine.read(uuid);
         Optional<Token> token;
         Map<CellPosition, Token> board = game.getBoard();
         Stream<Token> tokens = board.keySet().stream()
@@ -99,7 +98,8 @@ public class GameServiceImpl implements GameService{
      * Gets the corresponding factory for the given game type, creates the associated game,
      * adds it to the collection and returns
      * @param gameCreationParams
-     * @return The uuid of the created game
+     * @return IDK I'LL HAVE TO CHANGE THIS LATER
+     * TODO: Change return type later
      */
     @Override
     public String createGame(GameCreationParams gameCreationParams, Locale locale) {
@@ -112,8 +112,9 @@ public class GameServiceImpl implements GameService{
                         gameCreationParams.numberOfPlayers(),
                         gameCreationParams.boardSize()
                 );
-        String gameUUID = gamePersistenceEngine.create(game);
+        game = gamePersistenceEngine.create(game);
         String gameKey = "Game."+ gameCreationParams.gameType() + ".name";
-        return gameUUID += translationService.translate(gameKey, locale);
+//        return gameUUID += translationService.translate(gameKey, locale);
+        return gameKey;
     }
 }

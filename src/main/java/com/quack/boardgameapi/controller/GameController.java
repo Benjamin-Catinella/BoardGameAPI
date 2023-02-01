@@ -1,14 +1,12 @@
 package com.quack.boardgameapi.controller;
 
 import com.quack.boardgameapi.gamedata.GameCreationParams;
-import com.quack.boardgameapi.service.GameService;
+import com.quack.boardgameapi.service.interfaces.GameService;
 
 import fr.le_campus_numerique.square_games.engine.CellPosition;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.Token;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
