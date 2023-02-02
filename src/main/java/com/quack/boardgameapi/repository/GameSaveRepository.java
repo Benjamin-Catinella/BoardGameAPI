@@ -6,7 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameSaveRepository extends CrudRepository<GameSaveEntity, Long> {
-
     GameSaveEntity getById(Long id);
-
 }

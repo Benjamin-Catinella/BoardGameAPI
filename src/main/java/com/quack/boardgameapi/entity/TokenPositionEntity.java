@@ -1,26 +1,28 @@
 package com.quack.boardgameapi.entity;
 
 import fr.le_campus_numerique.square_games.engine.Token;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.UUID;
 
 @Entity
-public class TokenPositionEntity<E> implements DataEntity {
+public class TokenPositionEntity implements DataEntity {
     @Id
     private Long id;
-    private E owner;
-    @NotNull private String tokenName;
+    @ManyToOne
+    private UserEntity owner;
+    @NotNull
+    private String tokenName;
     private int x;
     private int y;
 
-    public E getOwner() {
+    public UserEntity getOwner() {
         return owner;
     }
 
-    public void setOwner(E owner) {
+    public void setOwner(UserEntity owner) {
         this.owner = owner;
     }
 
@@ -47,6 +49,7 @@ public class TokenPositionEntity<E> implements DataEntity {
     public void setY(int y) {
         this.y = y;
     }
+
     public void setId(Long id) {
         this.id = id;
     }

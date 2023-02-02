@@ -4,7 +4,6 @@ import com.quack.boardgameapi.gamedata.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.CellPosition;
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.Token;
-import org.springframework.cglib.core.Local;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,4 +23,6 @@ public interface GameService {
     Collection<Token> moveToken(String uuid, CellPosition[] cellPositions);
 
     String createGame(GameCreationParams gameCreationParams, Locale locale);
+
+    Game loadGameFromSaveID(Long saveID);
 }
