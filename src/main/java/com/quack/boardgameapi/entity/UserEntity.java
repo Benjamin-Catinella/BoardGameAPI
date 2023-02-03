@@ -1,9 +1,6 @@
 package com.quack.boardgameapi.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -18,6 +15,9 @@ public class UserEntity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<GameSaveEntity> saves;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<TokenPositionEntity> tokens;
 
     public String getUsername() {
         return username;
@@ -34,6 +34,15 @@ public class UserEntity {
 
     public UserEntity setUuid(UUID uuid) {
         this.uuid = uuid;
+        return this;
+    }
+
+    public Collection<TokenPositionEntity> getTokens() {
+        return tokens;
+    }
+
+    public UserEntity setTokens(Collection<TokenPositionEntity> tokens) {
+        this.tokens = tokens;
         return this;
     }
 

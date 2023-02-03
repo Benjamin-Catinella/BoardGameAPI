@@ -13,7 +13,7 @@ public class TokenPositionEntity implements DataEntity {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     private UserEntity owner;
     @NotNull
     private String tokenName;

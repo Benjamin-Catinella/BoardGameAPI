@@ -1,6 +1,5 @@
 package com.quack.boardgameapi.entity;
 
-import fr.le_campus_numerique.square_games.engine.GameFactory;
 import jakarta.persistence.*;
 import org.apache.logging.log4j.util.Strings;
 
@@ -15,14 +14,12 @@ public class GameSaveEntity implements DataEntity {
     private Long id;
 
     private String gameName;
-
     private int boardSize;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Collection<TokenPositionEntity> boardTokens;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Collection<TokenPositionEntity> removedTokens;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private Collection<UserEntity> players;
 
     public Long getId() {

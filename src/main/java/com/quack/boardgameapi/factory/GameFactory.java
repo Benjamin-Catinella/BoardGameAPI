@@ -51,7 +51,7 @@ public class GameFactory {
                     TokenPositionFactory.from(save.getRemovedTokens())
             );
         }catch (InconsistentGameDefinitionException definitionException){
-            LOGGER.error(definitionException.toString());
+            LOGGER.error(definitionException.getStackTrace().toString());
         }
         return null;
     }
