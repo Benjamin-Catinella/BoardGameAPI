@@ -1,6 +1,7 @@
 package com.quack.boardgameapi.entity;
 
 import fr.le_campus_numerique.square_games.engine.Token;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.NotNull;
@@ -10,8 +11,9 @@ import java.util.UUID;
 @Entity
 public class TokenPositionEntity implements DataEntity {
     @Id
+    @GeneratedValue
     private Long id;
-    @ManyToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private UserEntity owner;
     @NotNull
     private String tokenName;

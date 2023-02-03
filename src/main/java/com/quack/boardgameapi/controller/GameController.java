@@ -25,6 +25,10 @@ public class GameController {
     public Collection<Game> getGames() {
         return gameService.getGames();
     }
+    @GetMapping("/games/uuids")
+    public Collection<String> getGamesUUIDs() {
+        return gameService.getGamesUUIDs();
+    }
 
     @GetMapping("/games/types")
     public List<String> getGameIds() {
@@ -50,15 +54,6 @@ public class GameController {
         return gameService.createGame(gameCreationParams, locale);
     }
 
-    /**
-     * Requests the service layer to load a game from its ID
-     *
-     * @param saveID The Long ID of the save
-     * @return
-     */
-    @PostMapping("/games/saves")
-    public Game loadGameFromSave(@RequestBody Long saveID) {
-        return gameService.loadGameFromSaveID(saveID);
-    }
+
 
 }

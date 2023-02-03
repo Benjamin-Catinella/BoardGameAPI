@@ -11,5 +11,5 @@ import java.util.Collection;
  */
 @Service
 public interface GamePersistenceEngine extends PersistenceEngine<Game> {
-
+    Collection<String> getGamesUUIDs();
 }

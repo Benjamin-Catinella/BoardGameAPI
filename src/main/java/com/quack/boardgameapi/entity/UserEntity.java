@@ -1,6 +1,7 @@
 package com.quack.boardgameapi.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
@@ -15,7 +16,7 @@ public class UserEntity {
     private UUID uuid;
     private @NotNull String username;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Collection<GameSaveEntity> saves;
 
     public String getUsername() {

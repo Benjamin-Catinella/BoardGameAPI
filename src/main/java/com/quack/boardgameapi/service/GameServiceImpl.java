@@ -1,10 +1,8 @@
 package com.quack.boardgameapi.service;
 
 import com.quack.boardgameapi.controller.GamePluginsMap;
-import com.quack.boardgameapi.factory.GameFactory;
 import com.quack.boardgameapi.gamedata.GameCreationParams;
 
-import com.quack.boardgameapi.repository.GameSaveRepository;
 import com.quack.boardgameapi.service.interfaces.GameService;
 import com.quack.boardgameapi.service.interfaces.GamePersistenceEngine;
 import fr.le_campus_numerique.square_games.engine.CellPosition;
@@ -25,14 +23,14 @@ import java.util.stream.Stream;
 public class GameServiceImpl implements GameService {
 
     private GamePersistenceEngine gamePersistenceEngine;
-    @Autowired
-    private GameSaveRepository gameSaveRepository;
     private GamePluginsMap plugins;
+    private SaveServiceImpl saveService;
     private TranslationService translationService;
     @Autowired
-    public GameServiceImpl(GamePluginsMap plugins, TranslationService translationService , GamePersistenceEngine gamePersistenceEngine) {
+    public GameServiceImpl(GamePluginsMap plugins, TranslationService translationService , GamePersistenceEngine gamePersistenceEngine, SaveServiceImpl saveService) {
         this.gamePersistenceEngine = gamePersistenceEngine;
         this.plugins = plugins;
+        this.saveService = saveService;
         this.translationService = translationService;
     }
 
@@ -41,6 +39,10 @@ public class GameServiceImpl implements GameService {
         return gamePersistenceEngine.getAll();
     }
 
+    @Override
+    public Collection<String> getGamesUUIDs() {
+        return gamePersistenceEngine.getGamesUUIDs();
+    }
     @Override
     public List<String> getGameIds() {
         return plugins.getPluginMap().stream().map(gamePlugin -> gamePlugin.gameId()).toList();
@@ -132,17 +134,5 @@ public class GameServiceImpl implements GameService {
         return gameKey;
     }
 
-    /**
-     * Loads a game from a save
-     *
-     * @param gameCreationParams
-     * @param locale
-     * @param saveID
-     * @return
-     */
-    @Override
-    public Game loadGameFromSaveID(Long saveID) {
-        return GameFactory.from(gameSaveRepository.getById(saveID));
-    }
 
 }

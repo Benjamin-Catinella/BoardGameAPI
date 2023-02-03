@@ -3,6 +3,8 @@ package com.quack.boardgameapi.factory;
 import com.quack.boardgameapi.entity.TokenPositionEntity;
 import fr.le_campus_numerique.square_games.engine.Token;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -13,13 +15,15 @@ public class TokenPositionEntityFactory {
      * @param token
      * @return The TokenPositionEntity from the provided Token
      */
-    public static TokenPositionEntity from(Token token) {
+    public static TokenPositionEntity from(@NotNull Token token) {
         TokenPositionEntity newTokenPosition = new TokenPositionEntity();
-        // CAN BREAK TODO: CHANGE THIS CAN BREAK
-        newTokenPosition.setOwner(UserEntityFactory.from(token.getOwnerId().get()));
+        newTokenPosition.setOwner(token.getOwnerId().isPresent() ? UserEntityFactory.from(token.getOwnerId().get()) : null );
         newTokenPosition.setTokenName(token.getName());
-        newTokenPosition.setX(token.getPosition().x());
-        newTokenPosition.setY(token.getPosition().y());
+        //Set X position, can throw nullpointer, if so does nothing
+        try {
+            newTokenPosition.setX(token.getPosition().x());
+            newTokenPosition.setY(token.getPosition().y());
+        }catch (NullPointerException nullPointerException){}
         return newTokenPosition;
     }
 
@@ -31,8 +35,10 @@ public class TokenPositionEntityFactory {
      */
     public static Collection<TokenPositionEntity> from(Collection<Token> tokens) {
         Collection<TokenPositionEntity> t = new ArrayList<>();
-        for (Token token: tokens) {
-            t.add(TokenPositionEntityFactory.from(token));
+        if(!tokens.isEmpty()){
+            for (Token token: tokens) {
+                t.add(TokenPositionEntityFactory.from(token));
+            }
         }
         return t;
     }

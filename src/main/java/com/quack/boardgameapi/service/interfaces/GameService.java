@@ -8,10 +8,14 @@ import fr.le_campus_numerique.square_games.engine.Token;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public interface GameService {
 
+    //TODO: Change this so it's cleaner
     Collection<Game> getGames();
+
+    Collection<String> getGamesUUIDs();
 
     List<String> getGameIds();
 
@@ -24,5 +28,4 @@ public interface GameService {
 
     String createGame(GameCreationParams gameCreationParams, Locale locale);
 
-    Game loadGameFromSaveID(Long saveID);
 }

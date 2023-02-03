@@ -1,6 +1,5 @@
 package com.quack.boardgameapi.service.persistence;
 
-import com.quack.boardgameapi.entity.GameSaveEntity;
 import com.quack.boardgameapi.service.interfaces.GamePersistenceEngine;
 import fr.le_campus_numerique.square_games.engine.Game;
 import org.slf4j.Logger;
@@ -26,6 +25,7 @@ public class GameLocalPersistenceEngine implements GamePersistenceEngine {
     }
     @Override
     public Game read(Object uuid){
+        LOGGER.debug("Getting " + uuid.toString() + " from collection");
         Game game = this.collection.get(uuid);
         LOGGER.debug("Got " + game.toString() +" from collection");
         return game;
@@ -43,4 +43,8 @@ public class GameLocalPersistenceEngine implements GamePersistenceEngine {
         return this.collection.values();
     }
 
+    @Override
+    public Collection<String> getGamesUUIDs() {
+        return this.collection.keySet();
+    }
 }
