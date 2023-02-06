@@ -1,4 +1,4 @@
-package com.quack.boardgameapi.controller;
+package com.quack.boardgameapi.service;
 
 import com.quack.boardgameapi.plugins.GamePlugin;
 import jakarta.annotation.PostConstruct;

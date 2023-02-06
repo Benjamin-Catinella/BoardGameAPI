@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/public")
 public class SaveController {
     private SaveService saveService;
 

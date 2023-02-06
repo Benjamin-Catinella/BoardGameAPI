@@ -1,6 +1,5 @@
 package com.quack.boardgameapi.service;
 
-import com.quack.boardgameapi.controller.GamePluginsMap;
 import com.quack.boardgameapi.gamedata.GameCreationParams;
 
 import com.quack.boardgameapi.service.interfaces.GameService;
