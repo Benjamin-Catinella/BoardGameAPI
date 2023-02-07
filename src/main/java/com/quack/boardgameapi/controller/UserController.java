@@ -13,9 +13,9 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api/private")
-//@RequestMapping("/api/public")
-@Secured(Role.ROLE_ADMIN)
+//@RequestMapping("/api/private")
+@RequestMapping("/api/public")
+//@Secured(Role.ROLE_ADMIN)
 public class UserController {
 
     private UserService userService;
